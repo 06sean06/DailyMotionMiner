@@ -1,4 +1,4 @@
-package aissProyect.DailyMotionMiner;
+package aiss.DailyMotionMiner;
 
 import org.junit.jupiter.api.Test;
 

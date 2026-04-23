@@ -1,5 +1,5 @@
 
-package aissProyect.DailyMotionMiner.ModelDM.Video;
+package aiss.DailyMotionMiner.modelDM.user;
 
 import javax.annotation.processing.Generated;
 
@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "created_time"
 })
 @Generated("jsonschema2pojo")
-public class VideoList {
+public class UserList {
 
     @JsonProperty("id")
     private String id;
@@ -69,7 +69,7 @@ public class VideoList {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(VideoList.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+        sb.append(UserList.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
         sb.append("id");
         sb.append('=');
         sb.append(((this.id == null)?"<null>":this.id));

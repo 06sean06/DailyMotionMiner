@@ -1,4 +1,4 @@
-package aissProyect.DailyMotionMiner.services;
+package aiss.DailyMotionMiner.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import aissProyect.DailyMotionMiner.ModelDM.Channel.ChannelDM;
-import aissProyect.DailyMotionMiner.ModelDM.Channel.ChannelList;
+import aiss.DailyMotionMiner.modelDM.channel.ChannelDM;
+import aiss.DailyMotionMiner.modelDM.channel.ChannelList;
 
 @Service
 public class ChannelDMService {

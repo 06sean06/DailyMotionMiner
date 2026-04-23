@@ -1,4 +1,4 @@
-package aissProyect.DailyMotionMiner.services;
+package aiss.DailyMotionMiner.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import aissProyect.DailyMotionMiner.ModelDM.Video.VideoDM;
-import aissProyect.DailyMotionMiner.ModelDM.Video.VideoList;
+import aiss.DailyMotionMiner.modelDM.video.VideoDM;
+import aiss.DailyMotionMiner.modelDM.video.VideoList;
 
 @Service
 public class VideoDMService {

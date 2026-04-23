@@ -1,5 +1,5 @@
 
-package aissProyect.DailyMotionMiner.ModelDM.Channel;
+package aiss.DailyMotionMiner.modelDM.channel;
 
 import javax.annotation.processing.Generated;
 

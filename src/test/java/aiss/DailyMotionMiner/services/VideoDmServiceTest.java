@@ -1,4 +1,4 @@
-package aissProyect.DailyMotionMiner.services;
+package aiss.DailyMotionMiner.services;
 
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -8,9 +8,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-
-import aissProyect.DailyMotionMiner.ModelDM.Video.VideoList;
-import aissProyect.DailyMotionMiner.ModelDM.Video.VideoDM;
+import aiss.DailyMotionMiner.modelDM.video.VideoDM;
+import aiss.DailyMotionMiner.modelDM.video.VideoList;
 
 @SpringBootTest
 public class VideoDmServiceTest {
