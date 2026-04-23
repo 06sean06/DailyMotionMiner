@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "url"
 })
 @Generated("jsonschema2pojo")
-public class CaptionDetail {
+public class CaptionList {
 
     @JsonProperty("id")
     private String id;
@@ -81,7 +81,7 @@ public class CaptionDetail {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(CaptionDetail.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+        sb.append(CaptionList.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
         sb.append("id");
         sb.append('=');
         sb.append(((this.id == null)?"<null>":this.id));
