@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
 "id",
-"text",
+"message",
 "created_time",
 "screenname"
 })
@@ -17,8 +17,8 @@ public class CommentList {
 
 @JsonProperty("id")
 private String id;
-@JsonProperty("text")
-private String text;
+@JsonProperty("message")
+private String message;
 @JsonProperty("created_time")
 private Integer createdTime;
 @JsonProperty("screenname")
@@ -34,14 +34,14 @@ public void setId(String id) {
 this.id = id;
 }
 
-@JsonProperty("text")
-public String getText() {
-return text;
+@JsonProperty("message")
+public String getMessage() {
+return message;
 }
 
-@JsonProperty("text")
-public void setText(String text) {
-this.text = text;
+@JsonProperty("message")
+public void setMessage(String text) {
+this.message = text;
 }
 
 @JsonProperty("created_time")
@@ -74,7 +74,7 @@ sb.append(((this.id == null)?"<null>":this.id));
 sb.append(',');
 sb.append("text");
 sb.append('=');
-sb.append(((this.text == null)?"<null>":this.text));
+sb.append(((this.message == null)?"<null>":this.message));
 sb.append(',');
 sb.append("createdTime");
 sb.append('=');

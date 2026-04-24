@@ -30,7 +30,7 @@ public class CommentDM {
     @JsonProperty("has_more")
     private Boolean hasMore;
     @JsonProperty("list")
-    private List<Object> list;
+    private List<CommentList> list;
 
     @JsonProperty("page")
     public Integer getPage() {
@@ -83,12 +83,12 @@ public class CommentDM {
     }
 
     @JsonProperty("list")
-    public List<Object> getList() {
+    public List<CommentList> getList() {
         return list;
     }
 
     @JsonProperty("list")
-    public void setList(List<Object> list) {
+    public void setList(List<CommentList> list) {
         this.list = list;
     }
 
