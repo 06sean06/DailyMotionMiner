@@ -29,7 +29,7 @@ public class CaptionDM {
     private Integer total;
     @JsonProperty("has_more")
     private Boolean hasMore;
-    @JsonProperty("captionDetails")
+    @JsonProperty("list")
     private List<CaptionList> captionDetails;
 
     @JsonProperty("page")
@@ -82,12 +82,12 @@ public class CaptionDM {
         this.hasMore = hasMore;
     }
 
-    @JsonProperty("captionDetails")
+    @JsonProperty("list")
     public List<CaptionList> getCaptionDetails() {
         return captionDetails;
     }
 
-    @JsonProperty("captionDetails")
+    @JsonProperty("list")
     public void setCaptionDetails(List<CaptionList> captionDetails) {
         this.captionDetails = captionDetails;
     }
