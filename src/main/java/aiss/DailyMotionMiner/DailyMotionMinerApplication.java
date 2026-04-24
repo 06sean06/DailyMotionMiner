@@ -12,6 +12,7 @@ public class DailyMotionMinerApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(DailyMotionMinerApplication.class, args);
 	}
+	
 	@Bean
 	public RestTemplate restTemplate(RestTemplateBuilder builder) {
 		return builder.build();

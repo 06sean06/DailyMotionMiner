@@ -28,6 +28,7 @@ public class CaptionDMService {
         String uri = url + "/video/" + idVideo +"/subtitles?fields=id,item_type,language,language_label,url";
         HttpHeaders headers = new HttpHeaders();
         HttpEntity<CaptionDM> request = new HttpEntity<>(null, headers);
+        @SuppressWarnings("null")
         ResponseEntity<CaptionDM> response = restTemplate.exchange(uri, HttpMethod.GET, request,CaptionDM.class);
         CaptionDM body = response.getBody();
         if (response == null || body.getCaptionDetails() == null) {
