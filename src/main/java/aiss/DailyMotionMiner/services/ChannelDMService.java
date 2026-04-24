@@ -28,9 +28,9 @@ public class ChannelDMService {
     }
 
     //Get channel by ID https://api.dailymotion.com/user/{id}?fields=id,screenname,description,created_time
-    public ChannelDM getChannelById(String id) {
+    public ChannelList getChannelById(String id) {
         String uri = url + "/user/" + id + "?fields=id,screenname,description,created_time";
-        return restTemplate.getForObject(uri, ChannelDM.class);
+        return restTemplate.getForObject(uri, ChannelList.class);
     }
 
 

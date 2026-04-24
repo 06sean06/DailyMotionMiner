@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import aiss.DailyMotionMiner.modelDM.channel.ChannelDM;
 import aiss.DailyMotionMiner.modelDM.channel.ChannelList;
 import aiss.DailyMotionMiner.repositoryDM.ChannelDMRepository;
 
@@ -31,7 +30,7 @@ public class ChannelDMController {
 
     // GET http://localhost:8081/DailyMotionMiner/channels/{id}
     @GetMapping("/{id}")
-    public ChannelDM findById(@PathVariable String id) {
+    public ChannelList findById(@PathVariable String id) {
         return channelDMRepository.findOneById(id);
     }
 }

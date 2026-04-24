@@ -28,7 +28,7 @@ public class ChannelDMServiceTest {
     @DisplayName("Test getChannelById")
     public void testGetChannelById() {
         String channelId = "x4y70z4"; // Reemplaza con un ID de canal válido
-        ChannelDM channel = channelDMService.getChannelById(channelId);
+        ChannelList channel = channelDMService.getChannelById(channelId);
         assertNotNull(channel, "The channel should not be null");
     }
 
