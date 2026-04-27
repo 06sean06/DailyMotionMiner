@@ -1,7 +1,6 @@
 package aiss.DailyMotionMiner.services;
 
 import aiss.DailyMotionMiner.modelDM.comment.CommentList;
-import aiss.DailyMotionMiner.services.CommentDMService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

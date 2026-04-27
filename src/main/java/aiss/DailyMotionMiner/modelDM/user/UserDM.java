@@ -2,7 +2,6 @@
 package aiss.DailyMotionMiner.modelDM.user;
 
 import javax.annotation.processing.Generated;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -30,7 +29,7 @@ public class UserDM {
     @JsonProperty("has_more")
     private Boolean hasMore;
     @JsonProperty("list")
-    private java.util.List<UserList> list;
+    private java.util.List<aiss.DailyMotionMiner.modelDM.user.UserList> list;
 
     @JsonProperty("page")
     public Integer getPage() {
@@ -83,12 +82,12 @@ public class UserDM {
     }
 
     @JsonProperty("list")
-    public java.util.List<UserList> getList() {
+    public java.util.List<aiss.DailyMotionMiner.modelDM.user.UserList> getList() {
         return list;
     }
 
     @JsonProperty("list")
-    public void setList(java.util.List<UserList> list) {
+    public void setList(java.util.List<aiss.DailyMotionMiner.modelDM.user.UserList> list) {
         this.list = list;
     }
 

@@ -2,7 +2,6 @@
 package aiss.DailyMotionMiner.modelDM.user;
 
 import javax.annotation.processing.Generated;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -11,8 +10,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({
     "id",
     "screenname",
-    "description",
-    "created_time"
+    "url",
+    "avatar_120_url"
 })
 @Generated("jsonschema2pojo")
 public class UserList {
@@ -21,10 +20,10 @@ public class UserList {
     private String id;
     @JsonProperty("screenname")
     private String screenname;
-    @JsonProperty("description")
-    private String description;
-    @JsonProperty("created_time")
-    private Integer createdTime;
+    @JsonProperty("url")
+    private String url;
+    @JsonProperty("avatar_120_url")
+    private String avatar120Url;
 
     @JsonProperty("id")
     public String getId() {
@@ -46,24 +45,24 @@ public class UserList {
         this.screenname = screenname;
     }
 
-    @JsonProperty("description")
-    public String getDescription() {
-        return description;
+    @JsonProperty("url")
+    public String getUrl() {
+        return url;
     }
 
-    @JsonProperty("description")
-    public void setDescription(String description) {
-        this.description = description;
+    @JsonProperty("url")
+    public void setUrl(String url) {
+        this.url = url;
     }
 
-    @JsonProperty("created_time")
-    public Integer getCreatedTime() {
-        return createdTime;
+    @JsonProperty("avatar_120_url")
+    public String getAvatar120Url() {
+        return avatar120Url;
     }
 
-    @JsonProperty("created_time")
-    public void setCreatedTime(Integer createdTime) {
-        this.createdTime = createdTime;
+    @JsonProperty("avatar_120_url")
+    public void setAvatar120Url(String avatar120Url) {
+        this.avatar120Url = avatar120Url;
     }
 
     @Override
@@ -78,13 +77,13 @@ public class UserList {
         sb.append('=');
         sb.append(((this.screenname == null)?"<null>":this.screenname));
         sb.append(',');
-        sb.append("description");
+        sb.append("url");
         sb.append('=');
-        sb.append(((this.description == null)?"<null>":this.description));
+        sb.append(((this.url == null)?"<null>":this.url));
         sb.append(',');
-        sb.append("createdTime");
+        sb.append("avatar120Url");
         sb.append('=');
-        sb.append(((this.createdTime == null)?"<null>":this.createdTime));
+        sb.append(((this.avatar120Url == null)?"<null>":this.avatar120Url));
         sb.append(',');
         if (sb.charAt((sb.length()- 1)) == ',') {
             sb.setCharAt((sb.length()- 1), ']');
