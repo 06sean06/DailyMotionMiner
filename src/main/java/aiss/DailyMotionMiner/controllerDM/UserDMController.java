@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import aiss.DailyMotionMiner.exception.UserNotFoundException;
 import aiss.DailyMotionMiner.model.modelDM.user.UserList;
 import aiss.DailyMotionMiner.repositoryDM.UserDMRepository;
 
@@ -29,7 +30,7 @@ public class UserDMController {
 
     //GET http://localhost:8081/DailyMotionMiner/users/{id}
     @GetMapping("/{id}")
-    public UserList findById(String id) {
+    public UserList findById(String id) throws UserNotFoundException{
         return userDMRepository.findOneById(id);
     }
 

@@ -1,5 +1,6 @@
 package aiss.DailyMotionMiner.controllerDM;
 
+import aiss.DailyMotionMiner.exception.VideoNotFoundException;
 import aiss.DailyMotionMiner.model.modelDM.comment.CommentList;
 import aiss.DailyMotionMiner.services.CommentDMService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +19,9 @@ public class CommentDMController {
     @Autowired
     CommentDMService commentDMService;
 
-    //GET http://localhost:8080/api/dailymotion/comments/{videoId}
+    //GET http://localhost:8081/api/dailymotion/comments/{videoId}
     @GetMapping("/{videoId}")
-    public List<CommentList> getVideoComments(@PathVariable String videoId){
+    public List<CommentList> getVideoComments(@PathVariable String videoId) throws VideoNotFoundException {
         return commentDMService.getComments(videoId);
     }
     

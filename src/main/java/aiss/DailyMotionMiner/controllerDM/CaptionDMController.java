@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import aiss.DailyMotionMiner.exception.VideoNotFoundException;
 import aiss.DailyMotionMiner.model.modelDM.caption.CaptionList;
 import aiss.DailyMotionMiner.repositoryDM.CaptionDMRepository;
 
@@ -24,7 +25,7 @@ public class CaptionDMController {
 
     // GET http://localhost:8081/DailyMotionMiner/captions/{id}
     @GetMapping("/{idVideo}")
-    public List<CaptionList> getCaptions(@PathVariable String idVideo) {
+    public List<CaptionList> getCaptions(@PathVariable String idVideo) throws VideoNotFoundException{
         return captionDMRepository.findAll(idVideo);
     }
 
