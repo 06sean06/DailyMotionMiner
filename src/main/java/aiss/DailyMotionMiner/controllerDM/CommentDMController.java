@@ -17,7 +17,7 @@ public class CommentDMController {
     @Autowired
     CommentDMService commentDMService;
 
-    //GET http://localhost:8080/api/dailymotion/comments/{videoId}
+    //GET http://localhost:8081/api/dailymotion/comments/{videoId}
     @GetMapping("/{videoId}")
     public List<CommentList> getVideoComments(@PathVariable String videoId){
         return commentDMService.getComments(videoId);
