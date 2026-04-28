@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import aiss.DailyMotionMiner.modelDM.user.UserList;
+import aiss.DailyMotionMiner.model.modelDM.user.UserList;
 import aiss.DailyMotionMiner.services.UserDMService;
 
 @Repository

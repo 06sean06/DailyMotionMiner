@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import aiss.DailyMotionMiner.modelDM.channel.ChannelList;
+import aiss.DailyMotionMiner.model.modelDM.channel.ChannelList;
 
 @SpringBootTest
 public class ChannelDMServiceTest {

@@ -1,5 +1,4 @@
-
-package aiss.DailyMotionMiner.modelDM.caption;
+package aiss.DailyMotionMiner.model.modelDM.caption;
 
 import java.util.List;
 import javax.annotation.processing.Generated;

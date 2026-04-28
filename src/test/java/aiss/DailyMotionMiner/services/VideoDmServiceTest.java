@@ -8,8 +8,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import aiss.DailyMotionMiner.modelDM.video.VideoDM;
-import aiss.DailyMotionMiner.modelDM.video.VideoList;
+import aiss.DailyMotionMiner.model.modelDM.video.VideoDM;
+import aiss.DailyMotionMiner.model.modelDM.video.VideoList;
 
 @SpringBootTest
 public class VideoDmServiceTest {

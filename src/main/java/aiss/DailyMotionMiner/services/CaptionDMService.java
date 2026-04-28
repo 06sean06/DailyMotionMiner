@@ -11,8 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import aiss.DailyMotionMiner.modelDM.caption.CaptionDM;
-import aiss.DailyMotionMiner.modelDM.caption.CaptionList;
+import aiss.DailyMotionMiner.model.modelDM.caption.CaptionDM;
+import aiss.DailyMotionMiner.model.modelDM.caption.CaptionList;
 
 @Service
 public class CaptionDMService {

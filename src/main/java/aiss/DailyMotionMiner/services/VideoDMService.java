@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import aiss.DailyMotionMiner.modelDM.video.VideoDM;
-import aiss.DailyMotionMiner.modelDM.video.VideoList;
+import aiss.DailyMotionMiner.model.modelDM.video.VideoDM;
+import aiss.DailyMotionMiner.model.modelDM.video.VideoList;
 
 @Service
 public class VideoDMService {

@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import aiss.DailyMotionMiner.modelDM.comment.CommentDM;
-import aiss.DailyMotionMiner.modelDM.comment.CommentList;
+import aiss.DailyMotionMiner.model.modelDM.comment.CommentDM;
+import aiss.DailyMotionMiner.model.modelDM.comment.CommentList;
 import aiss.DailyMotionMiner.repositoryDM.CommentDMRepository;
 
 @Service

@@ -1,7 +1,8 @@
 package aiss.DailyMotionMiner.repositoryDM;
 
-import aiss.DailyMotionMiner.modelDM.comment.CommentList;
 import org.springframework.stereotype.Repository;
+
+import aiss.DailyMotionMiner.model.modelDM.comment.CommentList;
 
 import java.util.ArrayList;
 import java.util.List;

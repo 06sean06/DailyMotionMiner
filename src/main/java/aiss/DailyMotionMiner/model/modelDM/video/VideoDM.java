@@ -1,5 +1,5 @@
 
-package aiss.DailyMotionMiner.modelDM.channel;
+package aiss.DailyMotionMiner.model.modelDM.video;
 
 import javax.annotation.processing.Generated;
 
@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "list"
 })
 @Generated("jsonschema2pojo")
-public class ChannelDM {
+public class VideoDM {
 
     @JsonProperty("page")
     private Integer page;
@@ -30,7 +30,7 @@ public class ChannelDM {
     @JsonProperty("has_more")
     private Boolean hasMore;
     @JsonProperty("list")
-    private java.util.List<aiss.DailyMotionMiner.modelDM.channel.ChannelList> list;
+    private java.util.List<VideoList> list;
 
     @JsonProperty("page")
     public Integer getPage() {
@@ -83,19 +83,19 @@ public class ChannelDM {
     }
 
     @JsonProperty("list")
-    public java.util.List<aiss.DailyMotionMiner.modelDM.channel.ChannelList> getList() {
+    public java.util.List<VideoList> getList() {
         return list;
     }
 
     @JsonProperty("list")
-    public void setList(java.util.List<aiss.DailyMotionMiner.modelDM.channel.ChannelList> list) {
+    public void setList(java.util.List<VideoList> list) {
         this.list = list;
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(ChannelDM.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+        sb.append(VideoDM.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
         sb.append("page");
         sb.append('=');
         sb.append(((this.page == null)?"<null>":this.page));
@@ -105,6 +105,7 @@ public class ChannelDM {
         sb.append(((this.limit == null)?"<null>":this.limit));
         sb.append(',');
         sb.append("explicit");
+      
         sb.append('=');
         sb.append(((this.explicit == null)?"<null>":this.explicit));
         sb.append(',');

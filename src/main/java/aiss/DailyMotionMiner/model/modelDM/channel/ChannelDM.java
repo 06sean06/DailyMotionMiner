@@ -1,8 +1,8 @@
 
-package aiss.DailyMotionMiner.modelDM.comment;
+package aiss.DailyMotionMiner.model.modelDM.channel;
 
-import java.util.List;
 import javax.annotation.processing.Generated;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "list"
 })
 @Generated("jsonschema2pojo")
-public class CommentDM {
+public class ChannelDM {
 
     @JsonProperty("page")
     private Integer page;
@@ -30,7 +30,7 @@ public class CommentDM {
     @JsonProperty("has_more")
     private Boolean hasMore;
     @JsonProperty("list")
-    private List<CommentList> list;
+    private java.util.List<ChannelList> list;
 
     @JsonProperty("page")
     public Integer getPage() {
@@ -83,19 +83,19 @@ public class CommentDM {
     }
 
     @JsonProperty("list")
-    public List<CommentList> getList() {
+    public java.util.List<ChannelList> getList() {
         return list;
     }
 
     @JsonProperty("list")
-    public void setList(List<CommentList> list) {
+    public void setList(java.util.List<ChannelList> list) {
         this.list = list;
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(CommentDM.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+        sb.append(ChannelDM.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
         sb.append("page");
         sb.append('=');
         sb.append(((this.page == null)?"<null>":this.page));

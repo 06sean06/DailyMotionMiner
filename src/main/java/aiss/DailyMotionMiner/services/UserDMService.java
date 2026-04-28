@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import aiss.DailyMotionMiner.modelDM.user.UserDM;
-import aiss.DailyMotionMiner.modelDM.user.UserList;
+import aiss.DailyMotionMiner.model.modelDM.user.UserDM;
+import aiss.DailyMotionMiner.model.modelDM.user.UserList;
 
 @Service
 public class UserDMService {

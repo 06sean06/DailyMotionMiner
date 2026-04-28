@@ -1,5 +1,5 @@
 
-package aiss.DailyMotionMiner.modelDM.caption;
+package aiss.DailyMotionMiner.model.modelDM.caption;
 
 import javax.annotation.processing.Generated;
 import com.fasterxml.jackson.annotation.JsonInclude;

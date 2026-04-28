@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import aiss.DailyMotionMiner.modelDM.channel.ChannelDM;
-import aiss.DailyMotionMiner.modelDM.channel.ChannelList;
+import aiss.DailyMotionMiner.model.modelDM.channel.ChannelDM;
+import aiss.DailyMotionMiner.model.modelDM.channel.ChannelList;
 
 @Service
 public class ChannelDMService {

@@ -1,10 +1,12 @@
 package aiss.DailyMotionMiner.services;
 
-import aiss.DailyMotionMiner.modelDM.comment.CommentList;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import aiss.DailyMotionMiner.model.modelDM.comment.CommentList;
+
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 

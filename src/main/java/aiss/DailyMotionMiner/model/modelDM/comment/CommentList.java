@@ -1,4 +1,4 @@
-package aiss.DailyMotionMiner.modelDM.comment;
+package aiss.DailyMotionMiner.model.modelDM.comment;
 
 import javax.annotation.processing.Generated;
 import com.fasterxml.jackson.annotation.JsonInclude;

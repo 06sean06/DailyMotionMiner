@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import aiss.DailyMotionMiner.modelDM.caption.CaptionList;
+import aiss.DailyMotionMiner.model.modelDM.caption.CaptionList;
 import aiss.DailyMotionMiner.repositoryDM.CaptionDMRepository;
 
 @RestController
