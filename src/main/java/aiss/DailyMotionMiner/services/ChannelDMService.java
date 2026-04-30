@@ -8,6 +8,7 @@ import org.springframework.web.client.RestTemplate;
 
 import aiss.DailyMotionMiner.model.modelDM.channel.ChannelDM;
 import aiss.DailyMotionMiner.model.modelDM.channel.ChannelList;
+import aiss.DailyMotionMiner.model.modelVM.ChannelVM;
 
 @Service
 public class ChannelDMService {
@@ -33,6 +34,14 @@ public class ChannelDMService {
         return restTemplate.getForObject(uri, ChannelList.class);
     }
 
-
+    //Transform channel
+    public ChannelVM transformChannel(ChannelList data) {
+        ChannelVM channel = new ChannelVM();
+        channel.setId(data.getId());
+        channel.setName(data.getScreenname());
+        channel.setDescription(data.getDescription());
+        channel.setCreated_time(data.getCreatedTime().toString());
+        return channel;
+    }
 
 }

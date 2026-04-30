@@ -9,6 +9,7 @@ import org.springframework.web.client.RestTemplate;
 
 import aiss.DailyMotionMiner.model.modelDM.user.UserDM;
 import aiss.DailyMotionMiner.model.modelDM.user.UserList;
+import aiss.DailyMotionMiner.model.modelVM.UserVM;
 
 @Service
 public class UserDMService {
@@ -35,5 +36,14 @@ public class UserDMService {
         String uri = url + "/user/" + id + "?fields=id,screenname,url,avatar_120_url";
         return restTemplate.getForObject(uri, UserList.class);
     }
-    
+
+    //Transformar usuario
+    public UserVM transformUser(UserList data) {
+        UserVM user = new UserVM();
+        user.setId(data.getId());
+        user.setName(data.getScreenname());
+        user.setPicture_link(data.getAvatar120Url());
+        user.setUser_link(data.getUrl());
+        return user;
+    }
 }

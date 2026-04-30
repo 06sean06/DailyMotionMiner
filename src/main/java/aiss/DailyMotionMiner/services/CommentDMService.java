@@ -9,6 +9,7 @@ import org.springframework.web.client.RestTemplate;
 
 import aiss.DailyMotionMiner.model.modelDM.comment.CommentDM;
 import aiss.DailyMotionMiner.model.modelDM.comment.CommentList;
+import aiss.DailyMotionMiner.model.modelVM.CommentVM;
 import aiss.DailyMotionMiner.repositoryDM.CommentDMRepository;
 
 @Service
@@ -30,5 +31,15 @@ public class CommentDMService {
         if (response == null || response.getList() == null){
             repository.saveAll(response.getList());
         }return response.getList();
+    }
+
+
+    //Transformar comentario
+    public CommentVM transformComment(CommentList data) {
+        CommentVM comment = new CommentVM();
+        comment.setId(data.getId().toString());
+        comment.setText(data.getMessage());
+        comment.setCreatedOn(data.getCreatedTime().toString());
+        return comment;
     }
 }

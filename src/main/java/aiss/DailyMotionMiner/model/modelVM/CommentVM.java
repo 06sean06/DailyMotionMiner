@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 public class CommentVM {
     
     @JsonProperty("id")
-    private Long id;
+    private String id;
     @JsonProperty("text")
     private String text;
     @JsonProperty("createdOn")
@@ -22,12 +22,12 @@ public class CommentVM {
 
 
     @JsonProperty("id")
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
     @JsonProperty("id")
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

@@ -8,6 +8,7 @@ import org.springframework.web.client.RestTemplate;
 
 import aiss.DailyMotionMiner.model.modelDM.video.VideoDM;
 import aiss.DailyMotionMiner.model.modelDM.video.VideoList;
+import aiss.DailyMotionMiner.model.modelVM.VideoVM;
 
 @Service
 public class VideoDMService {
@@ -31,6 +32,17 @@ public class VideoDMService {
     public VideoDM getVideoById(String id) {
         String uri = url + "/video/" + id + "?fields=id,title,description,created_time";
         return restTemplate.getForObject(uri, VideoDM.class);
-}
+    }
+    
+
+    //Transformar video
+    public VideoVM transformVideo(VideoList data) {
+        VideoVM video = new VideoVM();
+        video.setId(data.getId());
+        video.setName(data.getScreenname());
+        video.setDescription(data.getDescription());
+        video.setReleaseTime(data.getCreatedTime().toString());
+        return video;
+    }
 }
 

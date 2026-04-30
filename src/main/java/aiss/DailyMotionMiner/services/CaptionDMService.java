@@ -13,6 +13,7 @@ import org.springframework.web.client.RestTemplate;
 
 import aiss.DailyMotionMiner.model.modelDM.caption.CaptionDM;
 import aiss.DailyMotionMiner.model.modelDM.caption.CaptionList;
+import aiss.DailyMotionMiner.model.modelVM.CaptionVM;
 
 @Service
 public class CaptionDMService {
@@ -35,5 +36,14 @@ public class CaptionDMService {
             return List.of();
         }
         return body.getCaptionDetails();
+    }
+
+    //Transformar caption
+    public CaptionVM transformCaption(CaptionList data) {
+        CaptionVM caption = new CaptionVM();
+        caption.setId(data.getId().toString());
+        caption.setLanguage(data.getLanguage());
+        caption.setLink(data.getUrl());
+        return caption;
     }
 }
