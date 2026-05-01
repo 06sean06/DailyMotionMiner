@@ -12,7 +12,7 @@ import aiss.DailyMotionMiner.model.modelVM.UserVM;
 import aiss.DailyMotionMiner.model.modelVM.VideoVM;
 
 public class Transformer {
-     public CaptionVM transformCaption(CaptionList data) {
+     public static CaptionVM transformCaption(CaptionList data) {
         CaptionVM caption = new CaptionVM();
         caption.setId(data.getId().toString());
         caption.setLanguage(data.getLanguage());
@@ -48,7 +48,7 @@ public class Transformer {
         return user;
     }
 
-     public VideoVM transformVideo(VideoList data) {
+     public static VideoVM transformVideo(VideoList data) {
         VideoVM video = new VideoVM();
         video.setId(data.getId());
         video.setName(data.getScreenname());
