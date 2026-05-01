@@ -1,6 +1,10 @@
 package aiss.DailyMotionMiner.transformer;
 
-import aiss.DailyMotionMiner.model.modelDM.caption.CaptionDM;
+import aiss.DailyMotionMiner.model.modelDM.caption.CaptionList;
+import aiss.DailyMotionMiner.model.modelDM.channel.ChannelList;
+import aiss.DailyMotionMiner.model.modelDM.comment.CommentList;
+import aiss.DailyMotionMiner.model.modelDM.user.UserList;
+import aiss.DailyMotionMiner.model.modelDM.video.VideoList;
 import aiss.DailyMotionMiner.model.modelVM.CaptionVM;
 import aiss.DailyMotionMiner.model.modelVM.ChannelVM;
 import aiss.DailyMotionMiner.model.modelVM.CommentVM;
@@ -8,55 +12,53 @@ import aiss.DailyMotionMiner.model.modelVM.UserVM;
 import aiss.DailyMotionMiner.model.modelVM.VideoVM;
 
 public class Transformer {
-     //Transformar caption
-    public CaptionVM transformCaption(CaptionDM data) {
-        CaptionVM caption = new CaptionVM ();
-        caption.setLanguage(data);   //mirar si label es el nombre del lenguaje
-        caption.setLink(data.getCaptionPath());    //mirar si captionPath es el enlace de la caption
+     public CaptionVM transformCaption(CaptionList data) {
+        CaptionVM caption = new CaptionVM();
+        caption.setId(data.getId().toString());
+        caption.setLanguage(data.getLanguage());
+        caption.setLink(data.getUrl());
         return caption;
+
+
     }
 
-    //Transformar canal
-    public ChannelVM transformChannel(ChannelDM data) {
+     public ChannelVM transformChannel(ChannelList data) {
         ChannelVM channel = new ChannelVM();
-        channel.setId(data.getId().toString());
-        channel.setName(data.getName());
-        channel.setDescription(data.getDescription().toString());
-        channel.setCreated_time(data.getCreatedAt());
+        channel.setId(data.getId());
+        channel.setName(data.getScreenname());
+        channel.setDescription(data.getDescription());
+        channel.setCreated_time(data.getCreatedTime().toString());
         return channel;
     }
 
-    //Transformar user
-    public UserVM transformUser(OwnerAccountPT data) {
+     public CommentVM transformComment(CommentList data) {
+        CommentVM comment = new CommentVM();
+        comment.setId(data.getId().toString());
+        comment.setText(data.getMessage());
+        comment.setCreatedOn(data.getCreatedTime().toString());
+        return comment;
+    }
+
+     public UserVM transformUser(UserList data) {
         UserVM user = new UserVM();
-        user.setId(data.getId().toString());
-        user.setName(data.getName());
-        if (data.getAvatars() != null && !data.getAvatars().isEmpty()) {
-            user.setPicture_link(data.getAvatars().get(0).toString());
-        } else {
-            user.setPicture_link(null);
-        }
+        user.setId(data.getId());
+        user.setName(data.getScreenname());
+        user.setPicture_link(data.getAvatar120Url());
+        user.setUser_link(data.getUrl());
         return user;
     }
 
-    //Transformar video
-    public VideoVM transformVideo(VideoPT data) {
+     public VideoVM transformVideo(VideoList data) {
         VideoVM video = new VideoVM();
-        video.setId(data.getId().toString());
-        video.setName(data.getName());
-        video.setDescription(data.getDescription().toString());
-        video.setReleaseTime(data.getPublishedAt());
+        video.setId(data.getId());
+        video.setName(data.getScreenname());
+        video.setDescription(data.getDescription());
+        video.setReleaseTime(data.getCreatedTime().toString());
         return video;
     }
-     //Transformar comentario
-    public CommentVM transformComment(CommentBasePT data) {
-        CommentVM comment = new CommentVM();
-        comment.setId(data.getId().toString());
-        comment.setText(data.getText());
-        comment.setCreatedOn(data.getCreatedAt());
-        return comment;
-    }
+
+
+
+
+
 }
-
-
-
