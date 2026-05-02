@@ -8,6 +8,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import aiss.DailyMotionMiner.model.modelDM.video.VideoDM;
@@ -39,8 +40,14 @@ public class VideoDMService {
     // GET VIDEO BY ID https://api.dailymotion.com/video/{id}?fields=id,title,description,created_time
     public VideoDM getVideoById(String id) {
         String uri = url + "/video/" + id + "?fields=id,title,description,created_time";
-        return restTemplate.getForObject(uri, VideoDM.class);
+        try {
+            return restTemplate.getForObject(uri, VideoDM.class);
+        } catch (HttpClientErrorException.NotFound e) {
+            return null; 
+        } catch (Exception e) {
+            return null;
     }
+}
     
 
     //Transformar video
