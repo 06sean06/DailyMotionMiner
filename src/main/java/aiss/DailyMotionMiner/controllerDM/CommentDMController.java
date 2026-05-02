@@ -22,7 +22,10 @@ public class CommentDMController {
     //GET http://localhost:8081/api/dailymotion/comments/{videoId}
     @GetMapping("/{videoId}")
     public List<CommentList> getVideoComments(@PathVariable String videoId) throws VideoNotFoundException {
-        return commentDMService.getComments(videoId);
+        List<CommentList> comment = commentDMService.getComments(videoId);
+        if (comment == null){
+            throw new VideoNotFoundException();
+        }return comment;
     }
     
 }
