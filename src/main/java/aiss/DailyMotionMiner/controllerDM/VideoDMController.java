@@ -15,7 +15,7 @@ import aiss.DailyMotionMiner.services.VideoDMService;
 
 
 @RestController
-@RequestMapping("/api/dailymotion/videos")
+@RequestMapping("DailyMotionMiner/videos")
 public class VideoDMController {
 
     @Autowired
@@ -29,8 +29,8 @@ public class VideoDMController {
 
     //GET http://localhost:8081/DailyMotionMiner/videos/{id}
     @GetMapping("/{id}")
-    public VideoDM findById(@PathVariable String id) throws VideoNotFoundException{
-        VideoDM video = videoDMService.getVideoById(id);
+    public VideoList findById(@PathVariable String id) throws VideoNotFoundException{
+        VideoList video = videoDMService.getVideoById(id);
         if (video == null){
             throw new VideoNotFoundException();
         }return video;

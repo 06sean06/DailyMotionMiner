@@ -28,7 +28,7 @@ public class VideoDmServiceTest {
     @DisplayName("Test getVideoById")
     public void testGetVideoById() {
         String videoId = "xa6kc0m"; // Reemplaza con un ID de video válido
-        VideoDM video = videoDMService.getVideoById(videoId);
+        VideoList video = videoDMService.getVideoById(videoId);
         assertNotNull(video, "The video should not be null");
     }
 

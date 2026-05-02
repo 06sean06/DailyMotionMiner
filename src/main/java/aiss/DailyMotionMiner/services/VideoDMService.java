@@ -38,10 +38,10 @@ public class VideoDMService {
     }
 
     // GET VIDEO BY ID https://api.dailymotion.com/video/{id}?fields=id,title,description,created_time
-    public VideoDM getVideoById(String id) {
+    public VideoList getVideoById(String id) {
         String uri = url + "/video/" + id + "?fields=id,title,description,created_time";
         try {
-            return restTemplate.getForObject(uri, VideoDM.class);
+            return restTemplate.getForObject(uri, VideoList.class);
         } catch (HttpClientErrorException.NotFound e) {
             return null; 
         } catch (Exception e) {

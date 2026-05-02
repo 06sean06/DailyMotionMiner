@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/dailymotion/comments")
+@RequestMapping("DailyMotionMiner/comments")
 public class CommentDMController {
 
     @Autowired
