@@ -13,19 +13,19 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 public class CaptionVM {
     @JsonProperty("id")
-    private String id;
+    private Long id;
     @JsonProperty("link")
     private String link;
     @JsonProperty("language")
     private String language;
 
     @JsonProperty("id")
-    public String getId() {
+    public Long getId() {
         return id;
     }  
 
     @JsonProperty("id")
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -1,5 +1,7 @@
 package aiss.DailyMotionMiner.model.modelVM;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -9,7 +11,10 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "id",
     "name",
     "description",
-    "releaseTime"
+    "releaseTime",
+    "captions",
+    "comments",
+    "user"
 })
 
 
@@ -23,6 +28,15 @@ public class VideoVM {
     private String description;
     @JsonProperty("releaseTime")
     private String releaseTime;
+
+    @JsonProperty("captions")
+    private List<CaptionVM> captions;
+
+    @JsonProperty("comments")
+    private List<CommentVM> comments;
+
+    @JsonProperty("user")
+    private UserVM user;
 
     @JsonProperty("id")
     public String getId() {
@@ -63,4 +77,22 @@ public class VideoVM {
     public void setReleaseTime(String releaseTime) {
         this.releaseTime = releaseTime;
     }
+
+    @JsonProperty("captions")
+    public List<CaptionVM> getCaptions() { return captions; }
+
+    @JsonProperty("captions")
+    public void setCaptions(List<CaptionVM> captions) { this.captions = captions; }
+
+    @JsonProperty("comments")
+    public List<CommentVM> getComments() { return comments; }
+
+    @JsonProperty("comments")
+    public void setComments(List<CommentVM> comments) { this.comments = comments; }
+
+    @JsonProperty("user")
+    public UserVM getUser() { return user; }
+
+    @JsonProperty("user")
+    public void setUser(UserVM user) { this.user = user; }
 }
