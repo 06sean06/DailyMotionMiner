@@ -13,16 +13,20 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/dailymotion/comments")
+@RequestMapping("DailyMotionMiner/comments")
 public class CommentDMController {
 
     @Autowired
     CommentDMService commentDMService;
 
-    //GET http://localhost:8081/api/dailymotion/comments/{videoId}
+    //GET http://localhost:8081/DailyMotionMiner/comments/{videoId}
+    
     @GetMapping("/{videoId}")
     public List<CommentList> getVideoComments(@PathVariable String videoId) throws VideoNotFoundException {
-        return commentDMService.getComments(videoId);
+        List<CommentList> comment = commentDMService.getComments(videoId);
+        if (comment == null){
+            throw new VideoNotFoundException();
+        }return comment;
     }
     
 }
