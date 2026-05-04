@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,7 +31,7 @@ public class UserDMController {
 
     //GET http://localhost:8081/DailyMotionMiner/users/{id}
     @GetMapping("/{id}")
-    public UserList findById(String id) throws UserNotFoundException{
+    public UserList findById(@PathVariable String id) throws UserNotFoundException{
         return userDMRepository.findOneById(id);
     }
 
