@@ -1,6 +1,7 @@
 package aiss.DailyMotionMiner.transformer;
 
 import java.time.Instant;
+import java.util.List;
 
 import org.springframework.stereotype.Component;
 
@@ -63,6 +64,16 @@ public class Transformer {
         video.setReleaseTime("00:00");
         return video;
     }
+
+    public List<CommentVM> transformTags(List<String> tags) {
+        return tags.stream().map(tag -> {
+                CommentVM vm = new CommentVM();
+                vm.setId("362737");  //Las tags no tienen id, me lo invento. Luego lo van a cambiar.
+                vm.setText(tag);             
+                vm.setCreatedOn(null);
+                return vm;}).toList();
+}
+
 
     private Long transformId(String s) {
         return Math.abs(s.hashCode()) * 1L;

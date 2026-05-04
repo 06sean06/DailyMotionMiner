@@ -36,6 +36,9 @@ public class OficialRepository {
     private UserDMService userDMService;
 
     @Autowired
+    private CommentDMService commentDMService;
+
+    @Autowired
     private Transformer transformer;
 
     @Autowired
@@ -64,7 +67,9 @@ public class OficialRepository {
             List<CaptionVM> captionsVM = captionsDM. stream().map(transformer::transformCaption).toList();
             videoVM.setCaptions(captionsVM);
 
-            videoVM.setComments(new ArrayList<>());
+            List<String> tags = commentDMService.getTagsOfVideo(videoDM.getId());
+            videoVM.setComments(transformer.transformTags(tags));
+
             videosVM.add(videoVM);
         }
         canalVM.setVideos(videosVM);

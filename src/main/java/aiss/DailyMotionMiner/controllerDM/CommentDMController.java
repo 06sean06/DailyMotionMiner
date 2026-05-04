@@ -2,6 +2,7 @@ package aiss.DailyMotionMiner.controllerDM;
 
 import aiss.DailyMotionMiner.exception.VideoNotFoundException;
 import aiss.DailyMotionMiner.model.modelDM.comment.CommentList;
+import aiss.DailyMotionMiner.repositoryDM.CommentDMRepository;
 import aiss.DailyMotionMiner.services.CommentDMService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,13 +18,13 @@ import java.util.List;
 public class CommentDMController {
 
     @Autowired
-    CommentDMService commentDMService;
+    CommentDMRepository commentDMRepository;
 
     //GET http://localhost:8081/DailyMotionMiner/comments/{videoId}
-    
+    // Comment obtendrá las tags en vez de los comentarios. 
     @GetMapping("/{videoId}")
     public List<CommentList> getVideoComments(@PathVariable String videoId) throws VideoNotFoundException {
-        List<CommentList> comment = commentDMService.getComments(videoId);
+        List<CommentList> comment = commentDMRepository.findAll(videoId);
         if (comment == null){
             throw new VideoNotFoundException();
         }return comment;
