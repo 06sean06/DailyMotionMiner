@@ -21,6 +21,9 @@ public class VideoDMService {
     @Autowired
     RestTemplate restTemplate;
 
+    @Autowired
+    private Transformer transformer;
+
     @Value("${dailymotion.url}")
     private String url;
 
@@ -48,22 +51,11 @@ public class VideoDMService {
             return null;
     }
 }
-    
-
-    //Transformar video
-    public VideoVM transformVideo(VideoList data) {
-        VideoVM video = new VideoVM();
-        video.setId(data.getId());
-        video.setName(data.getScreenname());
-        video.setDescription(data.getDescription());
-        video.setReleaseTime(data.getCreatedTime().toString());
-        return video;
-    }
 
     //POST VIDEO http://localhost:8080/VideoMiner/videos
     public VideoVM createVideo(VideoList videoDM) {
         String uri = urlvm + "/videos";
-        VideoVM transformed = Transformer.transformVideo(videoDM);
+        VideoVM transformed = transformer.transformVideo(videoDM);
 
         HttpHeaders headers = new HttpHeaders();
         HttpEntity<VideoVM> request = new HttpEntity<>(transformed, headers);

@@ -25,9 +25,13 @@ public class CaptionDMService {
     @Autowired
     RestTemplate restTemplate;
 
+    @Autowired
+    private Transformer transformer;
+
     @Value("${dailymotion.url}")
     private String url;
 
+    // GET CAPTIONS OF A VIDEO.
     // GET SUBTITLES https://api.dailymotion.com/video/{idVideo}/subtitles?fields=id,item_type,language,language_label,url
     @SuppressWarnings("null")
     public List<CaptionList> getCaptions(String idVideo) {
@@ -47,7 +51,7 @@ public class CaptionDMService {
         // El subtítulo va a subirse con un post a VideoMiner. 
         // Recibimos un subtítulo con formato de PeerTube y lo cambiamos a VideoMiner.
         String uri = urlvm + "/captions";
-        CaptionVM transformed = Transformer.transformCaption(captionDM);
+        CaptionVM transformed = transformer.transformCaption(captionDM);
         // A continuación lo subimos con POST a la uri indicada. 
         HttpHeaders headers = new HttpHeaders();
         HttpEntity<CaptionVM> request = new HttpEntity<>(transformed, headers);
@@ -57,15 +61,6 @@ public class CaptionDMService {
         if (caption == null ) {
             return null;
         }
-        return caption;
-    }
-
-    //Transformar caption
-    public CaptionVM transformCaption(CaptionList data) {
-        CaptionVM caption = new CaptionVM();
-        caption.setId(data.getId().toString());
-        caption.setLanguage(data.getLanguage());
-        caption.setLink(data.getUrl());
         return caption;
     }
 }

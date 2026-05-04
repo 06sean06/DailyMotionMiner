@@ -9,7 +9,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import aiss.DailyMotionMiner.model.modelDM.channel.ChannelDM;
 import aiss.DailyMotionMiner.model.modelDM.channel.ChannelList;
+import aiss.DailyMotionMiner.model.modelDM.video.VideoDM;
 
 @SpringBootTest
 public class ChannelDMServiceTest {
@@ -28,6 +30,14 @@ public class ChannelDMServiceTest {
     public void testGetChannelById() {
         String channelId = "x4y70z4"; // Reemplaza con un ID de canal válido
         ChannelList channel = channelDMService.getChannelById(channelId);
+        assertNotNull(channel, "The channel should not be null");
+    }
+
+    @Test
+    @DisplayName("Test getVideosByChannel")
+    public void testGetVideosByChannel() {
+        String channelId = "marca";
+        VideoDM channel = channelDMService.getVideosOfChannel(channelId);
         assertNotNull(channel, "The channel should not be null");
     }
 

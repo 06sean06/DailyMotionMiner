@@ -40,14 +40,4 @@ public class CommentDMService {
         return Collections.emptyList();
     }
 }
-
-
-    //Transformar comentario
-    public CommentVM transformComment(CommentList data) {
-        CommentVM comment = new CommentVM();
-        comment.setId(data.getId().toString());
-        comment.setText(data.getMessage());
-        comment.setCreatedOn(data.getCreatedTime().toString());
-        return comment;
-    }
 }

@@ -1,4 +1,5 @@
 package aiss.DailyMotionMiner.services;
+import java.nio.channels.Channel;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.web.client.RestTemplate;
 
 import aiss.DailyMotionMiner.model.modelDM.channel.ChannelDM;
 import aiss.DailyMotionMiner.model.modelDM.channel.ChannelList;
+import aiss.DailyMotionMiner.model.modelDM.video.VideoDM;
 import aiss.DailyMotionMiner.model.modelVM.ChannelVM;
 
 @Service
@@ -28,20 +30,22 @@ public class ChannelDMService {
         return response.getList();
     }
 
+    // GET CHANNEL BY ID 
     //Get channel by ID https://api.dailymotion.com/user/{id}?fields=id,screenname,description,created_time
     public ChannelList getChannelById(String id) {
         String uri = url + "/user/" + id + "?fields=id,screenname,description,created_time";
         return restTemplate.getForObject(uri, ChannelList.class);
     }
 
-    //Transform channel
-    public ChannelVM transformChannel(ChannelList data) {
-        ChannelVM channel = new ChannelVM();
-        channel.setId(data.getId());
-        channel.setName(data.getScreenname());
-        channel.setDescription(data.getDescription());
-        channel.setCreated_time(data.getCreatedTime().toString());
-        return channel;
+    // GET VIDEOS OF A CHANNEL
+    public VideoDM getVideosOfChannel(String channelId) {
+        String uri = url + "/user/" + channelId + "/videos";
+        VideoDM response = restTemplate.getForObject(uri, VideoDM.class);
+        if (response == null ) {
+            return null;
+        }
+        return response;
     }
+
 
 }
