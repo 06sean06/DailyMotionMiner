@@ -1,20 +1,13 @@
 package aiss.DailyMotionMiner.repositoryDM;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 
-import aiss.DailyMotionMiner.model.modelDM.comment.CommentDM;
 import aiss.DailyMotionMiner.model.modelDM.comment.CommentList;
-import aiss.DailyMotionMiner.model.modelDM.comment.TagResponseDM;
 import aiss.DailyMotionMiner.services.CommentDMService;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Repository
 public class CommentDMRepository {

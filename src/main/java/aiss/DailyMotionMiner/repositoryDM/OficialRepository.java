@@ -48,18 +48,21 @@ public class OficialRepository {
     private String urlvm;
 
     public ChannelVM getAChannel(String channelId) {
+        //try {
+        //ChannelList canalDM = channelDMRepository.findOneById(channelId);
         ChannelList canalDM = channelDMService.getChannelById(channelId);
         if (canalDM == null) {
             return null;
         }
         ChannelVM canalVM = transformer.transformChannel(canalDM);
+       // VideoDM videosDM = channelDMRepository.getVideosOfChannel(channelId);
         VideoDM videosDM = channelDMService.getVideosOfChannel(channelId);
         List<VideoList> listaVideosDM = videosDM.getList();
 
         List<VideoVM> videosVM = new ArrayList<>();
         for (VideoList videoDM: listaVideosDM) {
             VideoVM videoVM = transformer.transformVideo(videoDM);
-
+            //Sacar el propietario fuera del for para no hacer tantas llamadas a la API
             UserList userDM = userDMService.getUserById(videoDM.getOwner());
             videoVM.setUser(transformer.transformUser(userDM));
 
@@ -74,6 +77,9 @@ public class OficialRepository {
         }
         canalVM.setVideos(videosVM);
         return canalVM;
+        //} catch (Exception e) {
+        //    return e.getMessage();
+        //}
     }
 
     public ChannelVM createAChannel(String channelId) {
