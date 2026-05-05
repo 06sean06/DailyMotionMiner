@@ -19,7 +19,6 @@ import aiss.DailyMotionMiner.model.modelVM.ChannelVM;
 import aiss.DailyMotionMiner.model.modelVM.VideoVM;
 import aiss.DailyMotionMiner.services.CaptionDMService;
 import aiss.DailyMotionMiner.services.ChannelDMService;
-import aiss.DailyMotionMiner.services.CommentDMService;
 import aiss.DailyMotionMiner.services.UserDMService;
 import aiss.DailyMotionMiner.transformer.Transformer;
 
@@ -36,9 +35,6 @@ public class OficialRepository {
     private UserDMService userDMService;
 
     @Autowired
-    private CommentDMService commentDMService;
-
-    @Autowired
     private Transformer transformer;
 
     @Autowired
@@ -48,21 +44,18 @@ public class OficialRepository {
     private String urlvm;
 
     public ChannelVM getAChannel(String channelId) {
-        //try {
-        //ChannelList canalDM = channelDMRepository.findOneById(channelId);
         ChannelList canalDM = channelDMService.getChannelById(channelId);
         if (canalDM == null) {
             return null;
         }
         ChannelVM canalVM = transformer.transformChannel(canalDM);
-       // VideoDM videosDM = channelDMRepository.getVideosOfChannel(channelId);
         VideoDM videosDM = channelDMService.getVideosOfChannel(channelId);
         List<VideoList> listaVideosDM = videosDM.getList();
 
         List<VideoVM> videosVM = new ArrayList<>();
         for (VideoList videoDM: listaVideosDM) {
             VideoVM videoVM = transformer.transformVideo(videoDM);
-            //Sacar el propietario fuera del for para no hacer tantas llamadas a la API
+
             UserList userDM = userDMService.getUserById(videoDM.getOwner());
             videoVM.setUser(transformer.transformUser(userDM));
 
@@ -70,16 +63,11 @@ public class OficialRepository {
             List<CaptionVM> captionsVM = captionsDM. stream().map(transformer::transformCaption).toList();
             videoVM.setCaptions(captionsVM);
 
-            List<String> tags = commentDMService.getTagsOfVideo(videoDM.getId());
-            videoVM.setComments(transformer.transformTags(tags));
-
+            videoVM.setComments(new ArrayList<>());
             videosVM.add(videoVM);
         }
         canalVM.setVideos(videosVM);
         return canalVM;
-        //} catch (Exception e) {
-        //    return e.getMessage();
-        //}
     }
 
     public ChannelVM createAChannel(String channelId) {
@@ -90,6 +78,33 @@ public class OficialRepository {
         String uri = urlvm + "/channels";
         ResponseEntity<ChannelVM> response = restTemplate.postForEntity(uri, channelVM, ChannelVM.class);
         return response.getBody();
+    }
+
+    public ChannelVM getAChannelByName(String name) {
+        ChannelList canalDM = channelDMService.getChannelByName(name);
+        if (canalDM == null) {
+            return null;
+        }
+        ChannelVM canalVM = transformer.transformChannel(canalDM);
+        VideoDM videosDM = channelDMService.getVideosOfChannel(canalDM.getId());
+        List<VideoList> listaVideosDM = videosDM.getList();
+
+        List<VideoVM> videosVM = new ArrayList<>();
+        for (VideoList videoDM: listaVideosDM) {
+            VideoVM videoVM = transformer.transformVideo(videoDM);
+
+            UserList userDM = userDMService.getUserById(videoDM.getOwner());
+            videoVM.setUser(transformer.transformUser(userDM));
+
+            List<CaptionList> captionsDM = captionDMService.getCaptions(videoDM.getId());
+            List<CaptionVM> captionsVM = captionsDM. stream().map(transformer::transformCaption).toList();
+            videoVM.setCaptions(captionsVM);
+
+            videoVM.setComments(new ArrayList<>());
+            videosVM.add(videoVM);
+        }
+        canalVM.setVideos(videosVM);
+        return canalVM;
     }
 
 }
