@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import aiss.DailyMotionMiner.exception.VideoNotFoundException;
-import aiss.DailyMotionMiner.model.modelDM.video.VideoDM;
 import aiss.DailyMotionMiner.model.modelDM.video.VideoList;
 import aiss.DailyMotionMiner.services.VideoDMService;
 
