@@ -20,19 +20,19 @@ public class OficialController {
         this.oficialRepository = oficialRepository;
     }
 
-    //GET http://localhost:8081/dailymotion/{channelId}
-    @GetMapping("/{channelId}")
-    public ChannelVM getChannelById(@PathVariable String channelId) throws ChannelNotFoundException{
-        ChannelVM channel = oficialRepository.getAChannel(channelId);
+    //GET http://localhost:8081/dailymotion/{channelName}
+    @GetMapping("/{channelName}")
+    public ChannelVM getChannelByName(@PathVariable String channelName) throws ChannelNotFoundException{
+        ChannelVM channel = oficialRepository.getAChannelByName(channelName);
         if (channel == null) {
             throw new ChannelNotFoundException();
         }
         return channel;
     }
 
-    @PostMapping("/{channelId}")
-    public ChannelVM createChannel(@PathVariable String channelId) throws ChannelNotFoundException {
-        ChannelVM created = oficialRepository.createAChannel(channelId);
+    @PostMapping("/{channelName}")
+    public ChannelVM createChannel(@PathVariable String channelName) throws ChannelNotFoundException {
+        ChannelVM created = oficialRepository.createAChannel(channelName);
         if (created == null) {
         throw new ChannelNotFoundException();
     }

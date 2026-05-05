@@ -1,5 +1,4 @@
 package aiss.DailyMotionMiner.services;
-import java.nio.channels.Channel;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,6 @@ import org.springframework.web.client.RestTemplate;
 import aiss.DailyMotionMiner.model.modelDM.channel.ChannelDM;
 import aiss.DailyMotionMiner.model.modelDM.channel.ChannelList;
 import aiss.DailyMotionMiner.model.modelDM.video.VideoDM;
-import aiss.DailyMotionMiner.model.modelVM.ChannelVM;
 
 @Service
 public class ChannelDMService {
@@ -45,6 +43,16 @@ public class ChannelDMService {
             return null;
         }
         return response;
+    }
+
+    // GET CHANNEL BY NAME
+    public ChannelList getChannelByName(String name) {
+        String uri = url + "/users?search=" + name + "&fields=id,screenname,description,created_time";
+        ChannelDM response = restTemplate.getForObject(uri, ChannelDM.class);
+        if (response == null || response.getList() == null || response.getList().isEmpty()) {
+            return null; 
+        }
+        return response.getList().get(0); 
     }
 
 

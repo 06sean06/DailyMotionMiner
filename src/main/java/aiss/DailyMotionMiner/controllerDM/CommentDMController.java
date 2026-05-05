@@ -3,7 +3,6 @@ package aiss.DailyMotionMiner.controllerDM;
 import aiss.DailyMotionMiner.exception.VideoNotFoundException;
 import aiss.DailyMotionMiner.model.modelDM.comment.CommentList;
 import aiss.DailyMotionMiner.repositoryDM.CommentDMRepository;
-import aiss.DailyMotionMiner.services.CommentDMService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
