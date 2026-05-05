@@ -20,7 +20,7 @@ public class UserDMRepository {
         return users;
     }
 
-    public UserList findOneById(String id) {
+    public UserList getUserById(String id) {
         UserList user = userDMService.getUserById(id);
         return user;
     }

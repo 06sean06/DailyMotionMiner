@@ -30,6 +30,12 @@ public class ChannelDMRepository {
         return channel;
     }
 
+    public ChannelList getChannelByName(String name) {
+        ChannelList channel = channelDMService.getChannelByName(name);
+        return channel;
+    }
+
+
     public VideoDM getVideosOfChannel(String channelId) {
         VideoDM videos = channelDMService.getVideosOfChannel(channelId);
         return videos;

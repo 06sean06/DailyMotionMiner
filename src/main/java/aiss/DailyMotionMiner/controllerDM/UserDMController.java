@@ -32,7 +32,7 @@ public class UserDMController {
     //GET http://localhost:8081/DailyMotionMiner/users/{id}
     @GetMapping("/{id}")
     public UserList findById(@PathVariable String id) throws UserNotFoundException{
-        return userDMRepository.findOneById(id);
+        return userDMRepository.getUserById(id);
     }
 
 }
