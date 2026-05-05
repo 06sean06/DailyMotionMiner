@@ -7,12 +7,14 @@ import org.springframework.stereotype.Repository;
 
 import aiss.DailyMotionMiner.exception.ChannelNotFoundException;
 import aiss.DailyMotionMiner.model.modelDM.channel.ChannelList;
+import aiss.DailyMotionMiner.model.modelDM.video.VideoDM;
 import aiss.DailyMotionMiner.services.ChannelDMService;
 
 @Repository
 public class ChannelDMRepository {
     
     @Autowired
+
     ChannelDMService channelDMService;
 
     public List<ChannelList> findAll() {
@@ -26,5 +28,10 @@ public class ChannelDMRepository {
             throw new ChannelNotFoundException();
         }
         return channel;
+    }
+
+    public VideoDM getVideosOfChannel(String channelId) {
+        VideoDM videos = channelDMService.getVideosOfChannel(channelId);
+        return videos;
     }
 }
