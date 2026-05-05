@@ -17,26 +17,23 @@ import aiss.DailyMotionMiner.model.modelDM.video.VideoList;
 import aiss.DailyMotionMiner.model.modelVM.CaptionVM;
 import aiss.DailyMotionMiner.model.modelVM.ChannelVM;
 import aiss.DailyMotionMiner.model.modelVM.VideoVM;
-import aiss.DailyMotionMiner.services.CaptionDMService;
-import aiss.DailyMotionMiner.services.ChannelDMService;
 import aiss.DailyMotionMiner.services.CommentDMService;
-import aiss.DailyMotionMiner.services.UserDMService;
 import aiss.DailyMotionMiner.transformer.Transformer;
 
 @Repository
 public class OficialRepository {
 
-    @Autowired
-    private ChannelDMService channelDMService;
+        @Autowired
+    private ChannelDMRepository channelDMRepository;
 
-    @Autowired
-    private CaptionDMService captionDMService;
+        @Autowired
+        private CaptionDMRepository captionDMRepository;
 
-    @Autowired
-    private UserDMService userDMService;
+        @Autowired
+        private UserDMRepository userDMRepository;
 
-    @Autowired
-    private CommentDMService commentDMService;
+        @Autowired
+        private CommentDMService commentDMService;
 
     @Autowired
     private Transformer transformer;
@@ -48,25 +45,20 @@ public class OficialRepository {
     private String urlvm;
 
     public ChannelVM getAChannel(String channelId) {
-        //try {
-        //ChannelList canalDM = channelDMRepository.findOneById(channelId);
-        ChannelList canalDM = channelDMService.getChannelById(channelId);
-        if (canalDM == null) {
-            return null;
-        }
+        try {
+        ChannelList canalDM = channelDMRepository.findOneById(channelId);
+        
         ChannelVM canalVM = transformer.transformChannel(canalDM);
-       // VideoDM videosDM = channelDMRepository.getVideosOfChannel(channelId);
-        VideoDM videosDM = channelDMService.getVideosOfChannel(channelId);
+       VideoDM videosDM = channelDMRepository.getVideosOfChannel(channelId);
         List<VideoList> listaVideosDM = videosDM.getList();
 
         List<VideoVM> videosVM = new ArrayList<>();
         for (VideoList videoDM: listaVideosDM) {
             VideoVM videoVM = transformer.transformVideo(videoDM);
-            //Sacar el propietario fuera del for para no hacer tantas llamadas a la API
-            UserList userDM = userDMService.getUserById(videoDM.getOwner());
+            UserList userDM = userDMRepository.findOneById(videoDM.getOwner());
             videoVM.setUser(transformer.transformUser(userDM));
 
-            List<CaptionList> captionsDM = captionDMService.getCaptions(videoDM.getId());
+            List<CaptionList> captionsDM = captionDMRepository.findAll(videoDM.getId());
             List<CaptionVM> captionsVM = captionsDM. stream().map(transformer::transformCaption).toList();
             videoVM.setCaptions(captionsVM);
 
@@ -77,9 +69,9 @@ public class OficialRepository {
         }
         canalVM.setVideos(videosVM);
         return canalVM;
-        //} catch (Exception e) {
-        //    return e.getMessage();
-        //}
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public ChannelVM createAChannel(String channelId) {
