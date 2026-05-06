@@ -38,19 +38,42 @@ public class OficialRepository {
 
         @Autowired
         private RestTemplate restTemplate;
+    
+    @Value("${dailymotion.default.maxVideos}")
+    private Integer defaultMaxVideos;
+
+    @Value("${dailymotion.default.maxPages}")
+    private Integer defaultMaxPages;
 
     @Value("${videominer.url}")
     private String urlvm;
 
-    public ChannelVM getAChannel(String channelId) {
+    public ChannelVM getAChannel(String channelId, Integer maxVideos, Integer maxPages) {
         try {
         ChannelList canalDM = channelDMRepository.findOneById(channelId);
-        
         ChannelVM canalVM = transformer.transformChannel(canalDM);
-       VideoDM videosDM = channelDMRepository.getVideosOfChannel(channelId);
-        List<VideoList> listaVideosDM = videosDM.getList();
+        int videoLimit = (maxVideos != null) ? maxVideos : defaultMaxVideos;
+        int pageLimit = (maxPages != null) ? maxPages : defaultMaxPages;
+
+        List<VideoList> listaVideos = new ArrayList<>();
+
+        for (int i = 1; i<= pageLimit; i++){
+            VideoDM paginaVideos = channelDMRepository.getVideosOfChannel(channelId, i, videoLimit);
+            if (paginaVideos != null && paginaVideos.getList() !=null){
+                listaVideos.addAll(paginaVideos.getList());
+                if (listaVideos.size() >= videoLimit){
+                    break;
+                }
+            }else{
+                break;
+            }
+        }
+        List<VideoList> listaVideosDM = listaVideos.stream() //se corta la lista
+                .limit(videoLimit)
+                .toList();
 
         List<VideoVM> videosVM = new ArrayList<>();
+
         for (VideoList videoDM: listaVideosDM) {
             VideoVM videoVM = transformer.transformVideo(videoDM);
             UserList userDM = userDMRepository.getUserById(videoDM.getOwner());
@@ -70,8 +93,10 @@ public class OficialRepository {
         }
     }
 
-    public ChannelVM createAChannel(String channelName) throws ChannelAlreadyExistsException {
-        ChannelVM channelVM = getAChannelByName(channelName);
+    //public ChannelVM createAChannel(String channelName) throws ChannelAlreadyExistsException {
+      //  ChannelVM channelVM = getAChannelByName(channelName);
+    public ChannelVM createAChannel(String channelId, Integer maxVideos, Integer maxPages) {
+        ChannelVM channelVM = getAChannel(channelId, maxVideos, maxPages);
         if (channelVM == null) {
             return null; 
         }
@@ -83,8 +108,8 @@ public class OficialRepository {
             if (existingResponse.getStatusCode().is2xxSuccessful()) {
                 throw new ChannelAlreadyExistsException();
             }
-        } catch (ChannelAlreadyExistsException e) {
-            throw e;
+       // } catch (ChannelAlreadyExistsException e) {
+         //   throw e;
         } catch (Exception e) {
             System.out.println("El canal no existe en VideoMiner, procediendo a crear...");
         }
