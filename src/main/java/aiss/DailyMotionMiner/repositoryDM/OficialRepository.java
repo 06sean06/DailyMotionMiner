@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 
+import aiss.DailyMotionMiner.exception.ChannelAlreadyExistsException;
 import aiss.DailyMotionMiner.model.modelDM.caption.CaptionList;
 import aiss.DailyMotionMiner.model.modelDM.channel.ChannelList;
 import aiss.DailyMotionMiner.model.modelDM.user.UserList;
@@ -69,13 +70,25 @@ public class OficialRepository {
         }
     }
 
-    public ChannelVM createAChannel(String channelId) {
-        ChannelVM channelVM = getAChannel(channelId);
+    public ChannelVM createAChannel(String channelName) throws ChannelAlreadyExistsException {
+        ChannelVM channelVM = getAChannelByName(channelName);
         if (channelVM == null) {
-            return null;
+            return null; 
         }
-        String uri = urlvm + "/channels";
-        ResponseEntity<ChannelVM> response = restTemplate.postForEntity(uri, channelVM, ChannelVM.class);
+        String realName = channelVM.getName();
+        String uriPost = urlvm + "/channels";
+        String uriGet = urlvm + "/channels/" + realName;
+        try {
+            ResponseEntity<ChannelVM> existingResponse = restTemplate.getForEntity(uriGet, ChannelVM.class);
+            if (existingResponse.getStatusCode().is2xxSuccessful()) {
+                throw new ChannelAlreadyExistsException();
+            }
+        } catch (ChannelAlreadyExistsException e) {
+            throw e;
+        } catch (Exception e) {
+            System.out.println("El canal no existe en VideoMiner, procediendo a crear...");
+        }
+        ResponseEntity<ChannelVM> response = restTemplate.postForEntity(uriPost, channelVM, ChannelVM.class);
         return response.getBody();
     }
 

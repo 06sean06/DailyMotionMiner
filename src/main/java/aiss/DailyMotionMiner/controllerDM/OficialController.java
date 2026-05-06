@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import aiss.DailyMotionMiner.exception.ChannelAlreadyExistsException;
 import aiss.DailyMotionMiner.exception.ChannelNotFoundException;
 import aiss.DailyMotionMiner.model.modelVM.ChannelVM;
 import aiss.DailyMotionMiner.repositoryDM.OficialRepository;
@@ -31,7 +32,7 @@ public class OficialController {
     }
 
     @PostMapping("/{channelName}")
-    public ChannelVM createChannel(@PathVariable String channelName) throws ChannelNotFoundException {
+    public ChannelVM createChannel(@PathVariable String channelName) throws ChannelNotFoundException, ChannelAlreadyExistsException {
         ChannelVM created = oficialRepository.createAChannel(channelName);
         if (created == null) {
         throw new ChannelNotFoundException();
