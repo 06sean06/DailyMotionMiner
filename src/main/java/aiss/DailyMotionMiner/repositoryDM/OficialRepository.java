@@ -93,9 +93,7 @@ public class OficialRepository {
         }
     }
 
-    //public ChannelVM createAChannel(String channelName) throws ChannelAlreadyExistsException {
-      //  ChannelVM channelVM = getAChannelByName(channelName);
-    public ChannelVM createAChannel(String channelId, Integer maxVideos, Integer maxPages) {
+    public ChannelVM createAChannel(String channelId, Integer maxVideos, Integer maxPages) throws ChannelAlreadyExistsException {
         ChannelVM channelVM = getAChannel(channelId, maxVideos, maxPages);
         if (channelVM == null) {
             return null; 
@@ -108,8 +106,8 @@ public class OficialRepository {
             if (existingResponse.getStatusCode().is2xxSuccessful()) {
                 throw new ChannelAlreadyExistsException();
             }
-       // } catch (ChannelAlreadyExistsException e) {
-         //   throw e;
+        } catch (ChannelAlreadyExistsException e) {
+            throw e;
         } catch (Exception e) {
             System.out.println("El canal no existe en VideoMiner, procediendo a crear...");
         }
