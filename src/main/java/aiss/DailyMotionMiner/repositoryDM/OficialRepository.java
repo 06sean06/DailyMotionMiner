@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 
-import aiss.DailyMotionMiner.exception.ChannelAlreadyExistsException;
 import aiss.DailyMotionMiner.model.modelDM.caption.CaptionList;
 import aiss.DailyMotionMiner.model.modelDM.channel.ChannelList;
 import aiss.DailyMotionMiner.model.modelDM.user.UserList;
@@ -18,120 +17,49 @@ import aiss.DailyMotionMiner.model.modelDM.video.VideoList;
 import aiss.DailyMotionMiner.model.modelVM.CaptionVM;
 import aiss.DailyMotionMiner.model.modelVM.ChannelVM;
 import aiss.DailyMotionMiner.model.modelVM.VideoVM;
+import aiss.DailyMotionMiner.services.CaptionDMService;
+import aiss.DailyMotionMiner.services.ChannelDMService;
+import aiss.DailyMotionMiner.services.UserDMService;
 import aiss.DailyMotionMiner.transformer.Transformer;
 
 @Repository
 public class OficialRepository {
 
-        @Autowired
-        private ChannelDMRepository channelDMRepository;
+    @Autowired
+    private ChannelDMService channelDMService;
 
-        @Autowired
-        private CaptionDMRepository captionDMRepository;
+    @Autowired
+    private CaptionDMService captionDMService;
 
-        @Autowired
-        private UserDMRepository userDMRepository;
+    @Autowired
+    private UserDMService userDMService;
 
+    @Autowired
+    private Transformer transformer;
 
-        @Autowired
-        private Transformer transformer;
-
-        @Autowired
-        private RestTemplate restTemplate;
-    
-    @Value("${dailymotion.default.maxVideos}")
-    private Integer defaultMaxVideos;
-
-    @Value("${dailymotion.default.maxPages}")
-    private Integer defaultMaxPages;
+    @Autowired
+    private RestTemplate restTemplate;
 
     @Value("${videominer.url}")
     private String urlvm;
 
-    public ChannelVM getAChannel(String channelId, Integer maxVideos, Integer maxPages) {
-        try {
-        ChannelList canalDM = channelDMRepository.findOneById(channelId);
-        ChannelVM canalVM = transformer.transformChannel(canalDM);
-        int videoLimit = (maxVideos != null) ? maxVideos : defaultMaxVideos;
-        int pageLimit = (maxPages != null) ? maxPages : defaultMaxPages;
-
-        List<VideoList> listaVideos = new ArrayList<>();
-
-        for (int i = 1; i<= pageLimit; i++){
-            VideoDM paginaVideos = channelDMRepository.getVideosOfChannel(channelId, i, videoLimit);
-            if (paginaVideos != null && paginaVideos.getList() !=null){
-                listaVideos.addAll(paginaVideos.getList());
-                if (listaVideos.size() >= videoLimit){
-                    break;
-                }
-            }else{
-                break;
-            }
-        }
-        List<VideoList> listaVideosDM = listaVideos.stream() //se corta la lista
-                .limit(videoLimit)
-                .toList();
-
-        List<VideoVM> videosVM = new ArrayList<>();
-
-        for (VideoList videoDM: listaVideosDM) {
-            VideoVM videoVM = transformer.transformVideo(videoDM);
-            UserList userDM = userDMRepository.getUserById(videoDM.getOwner());
-            videoVM.setUser(transformer.transformUser(userDM));
-
-            List<CaptionList> captionsDM = captionDMRepository.findAll(videoDM.getId());
-            List<CaptionVM> captionsVM = captionsDM. stream().map(transformer::transformCaption).toList();
-            videoVM.setCaptions(captionsVM);
-
-            videoVM.setComments(new ArrayList<>());
-            videosVM.add(videoVM);
-        }
-        canalVM.setVideos(videosVM);
-        return canalVM;
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
-    public ChannelVM createAChannel(String channelId, Integer maxVideos, Integer maxPages) throws ChannelAlreadyExistsException {
-        ChannelVM channelVM = getAChannel(channelId, maxVideos, maxPages);
-        if (channelVM == null) {
-            return null; 
-        }
-        String realName = channelVM.getName();
-        String uriPost = urlvm + "/channels";
-        String uriGet = urlvm + "/channels/" + realName;
-        try {
-            ResponseEntity<ChannelVM> existingResponse = restTemplate.getForEntity(uriGet, ChannelVM.class);
-            if (existingResponse.getStatusCode().is2xxSuccessful()) {
-                throw new ChannelAlreadyExistsException();
-            }
-        } catch (ChannelAlreadyExistsException e) {
-            throw e;
-        } catch (Exception e) {
-            System.out.println("El canal no existe en VideoMiner, procediendo a crear...");
-        }
-        ResponseEntity<ChannelVM> response = restTemplate.postForEntity(uriPost, channelVM, ChannelVM.class);
-        return response.getBody();
-    }
-
-    public ChannelVM getAChannelByName(String name) {
-        ChannelList canalDM = channelDMRepository.getChannelByName(name);
+    public ChannelVM getAChannel(String channelId) {
+        ChannelList canalDM = channelDMService.getChannelById(channelId);
         if (canalDM == null) {
             return null;
         }
         ChannelVM canalVM = transformer.transformChannel(canalDM);
-        VideoDM videosDM = channelDMRepository.getVideosOfChannel(canalDM.getId());
+        VideoDM videosDM = channelDMService.getVideosOfChannel(channelId);
         List<VideoList> listaVideosDM = videosDM.getList();
 
         List<VideoVM> videosVM = new ArrayList<>();
         for (VideoList videoDM: listaVideosDM) {
             VideoVM videoVM = transformer.transformVideo(videoDM);
 
-            UserList userDM = userDMRepository.getUserById(videoDM.getOwner());
+            UserList userDM = userDMService.getUserById(videoDM.getOwner());
             videoVM.setUser(transformer.transformUser(userDM));
 
-            List<CaptionList> captionsDM = captionDMRepository.findAll(videoDM.getId());
+            List<CaptionList> captionsDM = captionDMService.getCaptions(videoDM.getId());
             List<CaptionVM> captionsVM = captionsDM. stream().map(transformer::transformCaption).toList();
             videoVM.setCaptions(captionsVM);
 
@@ -140,6 +68,16 @@ public class OficialRepository {
         }
         canalVM.setVideos(videosVM);
         return canalVM;
+    }
+
+    public ChannelVM createAChannel(String channelId) {
+        ChannelVM channelVM = getAChannel(channelId);
+        if (channelVM == null) {
+            return null;
+        }
+        String uri = urlvm + "/channels";
+        ResponseEntity<ChannelVM> response = restTemplate.postForEntity(uri, channelVM, ChannelVM.class);
+        return response.getBody();
     }
 
 }
