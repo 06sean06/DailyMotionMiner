@@ -35,15 +35,13 @@ public class ChannelDMService {
         return restTemplate.getForObject(uri, ChannelList.class);
     }
 
-    // GET VIDEOS OF A CHANNEL
-    public VideoDM getVideosOfChannel(String channelId) {
-        String uri = url + "/user/" + channelId + "/videos";
-        VideoDM response = restTemplate.getForObject(uri, VideoDM.class);
-        if (response == null ) {
-            return null;
-        }
-        return response;
-    }
+    // GET VIDEOS OF A CHANNEL: page = maxPages y limit = maxVideos. 
+    public VideoDM getVideosOfChannel(String channelId, Integer page, Integer limit) {
+    String uri = url + "/user/" + channelId + "/videos" +"?fields=id,title,description,created_time,owner" + "&page=" + page + "&limit=" + limit;
+    return restTemplate.getForObject(uri, VideoDM.class);
+}
+
+
 
     // GET CHANNEL BY NAME
     public ChannelList getChannelByName(String name) {
