@@ -44,7 +44,7 @@ public class ChannelDMServiceTest {
     @DisplayName("Test getVideosOfChannel")
     public void testGetVideosOfChannel() {
         String channelId = "marca";
-        VideoDM channel = channelDMService.getVideosOfChannel(channelId);
+        VideoDM channel = channelDMService.getVideosOfChannel(channelId, 10, 2);
         assertNotNull(channel, "The channel should not be null");
         assertNotNull(channel.getList(), "The list of videos should not be null");
         assertFalse(channel.getList().isEmpty(), "The list of videos should not be empty");
