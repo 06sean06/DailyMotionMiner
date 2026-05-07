@@ -16,11 +16,16 @@ import org.springframework.web.client.RestTemplate;
 import aiss.DailyMotionMiner.model.modelDM.comment.CommentDM;
 import aiss.DailyMotionMiner.model.modelDM.comment.CommentList;
 import aiss.DailyMotionMiner.model.modelDM.comment.TagResponseDM;
+import aiss.DailyMotionMiner.model.modelVM.CommentVM;
+import aiss.DailyMotionMiner.transformer.*;
 
 @Service
 public class CommentDMService {
     @Autowired
     RestTemplate restTemplate;
+
+    @Autowired
+    Transformer transformer;
 
     @Value("${dailymotion.url}")
     private String url;
@@ -54,4 +59,9 @@ public class CommentDMService {
         return Collections.emptyList();
     }
 }
+
+    public List<CommentVM> getComments1(String videoId) {
+        List<CommentVM> comments = transformer.transformTags(getTagsOfVideo(videoId));
+        return comments;
+    }
 }
