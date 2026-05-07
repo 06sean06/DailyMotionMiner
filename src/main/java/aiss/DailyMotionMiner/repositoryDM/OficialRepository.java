@@ -16,9 +16,11 @@ import aiss.DailyMotionMiner.model.modelDM.video.VideoDM;
 import aiss.DailyMotionMiner.model.modelDM.video.VideoList;
 import aiss.DailyMotionMiner.model.modelVM.CaptionVM;
 import aiss.DailyMotionMiner.model.modelVM.ChannelVM;
+import aiss.DailyMotionMiner.model.modelVM.CommentVM;
 import aiss.DailyMotionMiner.model.modelVM.VideoVM;
 import aiss.DailyMotionMiner.services.CaptionDMService;
 import aiss.DailyMotionMiner.services.ChannelDMService;
+import aiss.DailyMotionMiner.services.CommentDMService;
 import aiss.DailyMotionMiner.services.UserDMService;
 import aiss.DailyMotionMiner.transformer.Transformer;
 
@@ -33,6 +35,9 @@ public class OficialRepository {
 
     @Autowired
     private UserDMService userDMService;
+
+    @Autowired
+    private CommentDMService commentDMService;
 
     @Autowired
     private Transformer transformer;
@@ -82,7 +87,10 @@ public class OficialRepository {
             List<CaptionVM> captionsVM = captionsDM.stream().map(transformer::transformCaption).toList();
             videoVM.setCaptions(captionsVM);
 
-            videoVM.setComments(new ArrayList<>());
+            List<String> tagsOfComments = commentDMService.getTagsOfVideo(videoDM.getId());
+            List<CommentVM> comments = transformer.transformTags(tagsOfComments);
+
+            videoVM.setComments(comments);
             videosVM.add(videoVM);
         }
         canalVM.setVideos(videosVM);
