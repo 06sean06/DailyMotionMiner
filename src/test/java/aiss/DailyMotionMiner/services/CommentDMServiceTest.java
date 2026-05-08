@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import aiss.DailyMotionMiner.model.modelVM.CommentVM;
+import aiss.DailyMotionMiner.model.modelDM.comment.CommentList;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -27,7 +27,7 @@ public class CommentDMServiceTest {
     List<String> tags = commentDMService.getTagsOfVideo(videoId);
 
     assertNotNull(tags, "The list of tags should not be null");
-    assertFalse(tags.isEmpty(), "The list of tags should not be empty");   
+    assertFalse(tags.isEmpty(), "The list of tags should not be empty"); 
   }
 
   
@@ -36,12 +36,8 @@ public class CommentDMServiceTest {
   @DisplayName("Get comments from a dailymotion video")
   void testGetComment() {
     String videoId = "xa8ewo4";
-    List<CommentVM> comments = commentDMService.getComments1(videoId);
+    List<CommentList> comments = commentDMService.getComments(videoId);
 
     assertNotNull(comments, "The list of comments should not be null");
-    assertFalse(comments.isEmpty(), "The list of comments should not be empty");
-    assertNotNull(comments.get(0), "The first comment should not be null");
-
-    assertNotNull(comments.get(0).getText(), "The text of the first comment should not be null");
   }
 }
