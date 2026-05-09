@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import aiss.DailyMotionMiner.exception.ChannelNotFoundException;
 import aiss.DailyMotionMiner.model.modelDM.channel.ChannelList;
 import aiss.DailyMotionMiner.model.modelDM.video.VideoDM;
 
@@ -31,7 +32,7 @@ public class ChannelDMServiceTest {
 
     @Test
     @DisplayName("Test getChannelById")
-    public void testGetChannelById() {
+    public void testGetChannelById() throws ChannelNotFoundException {
         String channelId = "x4y70z4"; 
         ChannelList channel = channelDMService.getChannelById(channelId);
         assertNotNull(channel, "The channel should not be null");

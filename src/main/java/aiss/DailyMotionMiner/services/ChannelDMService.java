@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import aiss.DailyMotionMiner.exception.ChannelNotFoundException;
 import aiss.DailyMotionMiner.model.modelDM.channel.ChannelDM;
 import aiss.DailyMotionMiner.model.modelDM.channel.ChannelList;
 import aiss.DailyMotionMiner.model.modelDM.video.VideoDM;
@@ -30,9 +31,13 @@ public class ChannelDMService {
 
     // GET CHANNEL BY ID 
     //Get channel by ID https://api.dailymotion.com/user/{id}?fields=id,screenname,description,created_time
-    public ChannelList getChannelById(String id) {
+    public ChannelList getChannelById(String id) throws ChannelNotFoundException {
         String uri = url + "/user/" + id + "?fields=id,screenname,description,created_time";
-        return restTemplate.getForObject(uri, ChannelList.class);
+        ChannelList channel = restTemplate.getForObject(uri, ChannelList.class);
+        if (channel == null) {
+            throw new ChannelNotFoundException();
+        }
+        return channel;
     }
 
     // GET VIDEOS OF A CHANNEL: page = maxPages y limit = maxVideos. 

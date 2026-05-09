@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 
+import aiss.DailyMotionMiner.exception.ChannelNotFoundException;
 import aiss.DailyMotionMiner.model.modelDM.caption.CaptionList;
 import aiss.DailyMotionMiner.model.modelDM.channel.ChannelList;
 import aiss.DailyMotionMiner.model.modelDM.user.UserList;
@@ -56,7 +57,8 @@ public class OficialRepository {
     private String urlvm;
 
     public ChannelVM getAChannel(String channelId, Integer maxVideos, Integer maxPages) {
-        ChannelList canalDM = channelDMService.getChannelById(channelId);
+        try {
+            ChannelList canalDM = channelDMService.getChannelById(channelId);
         if (canalDM == null) {
             return null;
         }
@@ -76,7 +78,6 @@ public class OficialRepository {
         // Limitamos los videos y los formamoos con sus comments y captions. 
         List<VideoList> listaVideosDM = acumulados.stream().limit(finalMaxVideos).toList();
         List<VideoVM> videosVM = new ArrayList<>();
-
         for (VideoList videoDM : listaVideosDM) {
             VideoVM videoVM = transformer.transformVideo(videoDM);
 
@@ -96,6 +97,9 @@ public class OficialRepository {
         canalVM.setVideos(videosVM);
 
         return canalVM;
+        } catch (ChannelNotFoundException | RuntimeException e) {
+            return null;
+        }
     }
 
     // Si no recibe ningún parámetro de consulta, entonces, se tomará como null y se buscarán max 2 páginas y 10 vídeos:
